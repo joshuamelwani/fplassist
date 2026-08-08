@@ -1,0 +1,12 @@
+{
+  "name": "Squad Room \u2014 FPL Optimizer",
+  "short_name": "Squad Room",
+  "description": "Expected-points forecasts and squad optimization for Fantasy Premier League",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
