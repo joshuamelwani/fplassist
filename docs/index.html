@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Squad Room — FPL Optimizer</title>
+<meta name="description" content="Expected-points forecasts and squad optimization for Fantasy Premier League.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0B1220">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-row">
+    <div class="brand">Squad<span class="dot">.</span>Room</div>
+    <div class="gw-pill" id="gwPill">GW —</div>
+  </div>
+  <div class="status-bar">
+    <div class="stat-chip">
+      <span class="label">Budget left</span>
+      <span class="value" id="statBudget">—</span>
+    </div>
+    <div class="stat-chip">
+      <span class="label">Squad</span>
+      <span class="value" id="statSquadCount">0/15</span>
+    </div>
+    <div class="stat-chip">
+      <span class="label">Free transfers</span>
+      <span class="value" id="statFT">1</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- SQUAD BUILDER VIEW -->
+  <section class="view active" id="view-squad">
+    <div class="seg-control" id="squadModeToggle">
+      <button data-mode="optimal" class="active">Optimizer pick</button>
+      <button data-mode="manual">Build my own</button>
+    </div>
+
+    <div id="squadNotice"></div>
+
+    <div class="section-title">
+      <span id="squadHorizonLabel">Starting XI</span>
+    </div>
+    <div class="pitch-wrap">
+      <div class="pitch" id="pitchStarting"></div>
+      <div class="bench-strip" id="pitchBench"></div>
+    </div>
+
+    <div class="section-title">Squad cost</div>
+    <div class="card" id="squadSummaryCard"></div>
+
+    <div style="display:flex; gap:10px; margin-top: 14px;">
+      <button class="btn ghost" id="resetSquadBtn" style="flex:1;">Reset</button>
+      <button class="btn primary" id="lockSquadBtn" style="flex:1;">Save as my team</button>
+    </div>
+  </section>
+
+  <!-- TRANSFERS VIEW -->
+  <section class="view" id="view-transfers">
+    <div id="transfersContent"></div>
+  </section>
+
+  <!-- PLAYERS VIEW -->
+  <section class="view" id="view-players">
+    <input class="search-input" id="playerSearch" placeholder="Search players or clubs…">
+    <div class="filter-row" id="posFilterRow">
+      <button class="chip-toggle active" data-pos="ALL">All</button>
+      <button class="chip-toggle" data-pos="GKP">GKP</button>
+      <button class="chip-toggle" data-pos="DEF">DEF</button>
+      <button class="chip-toggle" data-pos="MID">MID</button>
+      <button class="chip-toggle" data-pos="FWD">FWD</button>
+    </div>
+    <div class="seg-control" id="sortToggle" style="margin-bottom:12px;">
+      <button data-sort="xP_next" class="active">Next GW</button>
+      <button data-sort="xP_3gw">Next 3</button>
+      <button data-sort="xP_5gw">Next 5</button>
+      <button data-sort="value_next">Value</button>
+    </div>
+    <div id="playerList"></div>
+  </section>
+
+  <!-- FIXTURES VIEW -->
+  <section class="view" id="view-fixtures">
+    <p class="card-sub" style="margin-bottom:14px;">Fixture difficulty, next 5 gameweeks. Greener is easier.</p>
+    <div class="fdr-grid" id="fdrGrid"></div>
+  </section>
+
+</main>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-view="squad">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
+    Squad
+  </button>
+  <button class="nav-btn" data-view="transfers">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3v14M7 17l-4-4M7 17l4-4M17 21V7M17 7l4 4M17 7l-4 4"/></svg>
+    Transfers
+  </button>
+  <button class="nav-btn" data-view="players">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    Players
+  </button>
+  <button class="nav-btn" data-view="fixtures">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+    Fixtures
+  </button>
+</nav>
+
+<div id="modalRoot"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
